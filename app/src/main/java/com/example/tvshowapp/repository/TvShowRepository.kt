@@ -7,7 +7,6 @@ class TvShowRepository @Inject constructor(
     private val apiService: ApiService
 )
 {
-    suspend fun getTvShows(){
-        apiService.getTvShows()
-    }
+    suspend fun getTvShows() = apiService.getTvShows()
+
 }

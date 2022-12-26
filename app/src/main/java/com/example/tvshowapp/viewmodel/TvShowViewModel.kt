@@ -12,22 +12,28 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TvShowViewModel @Inject constructor (private val repository: TvShowRepository) : ViewModel() {
+class TvShowViewModel
+@Inject
+constructor(private val repository: TvShowRepository) : ViewModel() {
 
     private val _response = MutableLiveData<List<TvShowItem>>()
-    val responseTvShow:LiveData<List<TvShowItem>>
-    get() = _response
+    val responseTvShow: LiveData<List<TvShowItem>>
+        get() = _response
+
     init {
         getAllTvShows()
     }
-    private fun getAllTvShows() = viewModelScope.launch {
-        repository.getTvShows().let {response ->
-            if (response.isSuccessful){
-                _response.postValue(response.body())
-            }else{
-                Log.d("tag", "getAllTvShows Error: ${response.code()}")
-            }
 
+    private fun getAllTvShows() = viewModelScope.launch {
+        repository.getTvShows().let {
+            if (it.isSuccessful){
+                _response.postValue(it.body())
+            }
+            else{
+                Log.d("tag","getAllTvShows Error:${it.code()}")
+            }
         }
+
+
     }
 }
