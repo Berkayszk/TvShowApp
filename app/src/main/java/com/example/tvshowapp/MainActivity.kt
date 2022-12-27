@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tvshowapp.adapter.PeopleShowAdapter
 import com.example.tvshowapp.adapter.TvShowAdapter
 import com.example.tvshowapp.databinding.ActivityMainBinding
 import com.example.tvshowapp.viewmodel.TvShowViewModel
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel : TvShowViewModel by viewModels()
     private lateinit var tvShowAdapter: TvShowAdapter
+    private lateinit var peopleShowAdapter: PeopleShowAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +42,8 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
         }
 
-        binding.recyclerViewRecently.apply {
-            adapter = tvShowAdapter
+        binding.recyclerViewPeople.apply {
+            adapter = peopleShowAdapter
             layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
         }

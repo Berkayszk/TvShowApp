@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tvshowapp.model.PeopleImagesItem
 import com.example.tvshowapp.model.TvShowItem
 import com.example.tvshowapp.repository.TvShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,8 +21,23 @@ constructor(private val repository: TvShowRepository) : ViewModel() {
     val responseTvShow: LiveData<List<TvShowItem>>
         get() = _response
 
+    private val _responsePeople = MutableLiveData<List<PeopleImagesItem>>()
+     val responsePeople: LiveData<List<PeopleImagesItem>>
+     get() = _responsePeople
+
     init {
+        getAllPeople()
         getAllTvShows()
+    }
+
+    private fun getAllPeople() = viewModelScope.launch {
+        repository.getPeople().let { response->
+            if (response.isSuccessful){
+                _responsePeople.postValue(response.body())
+            }else{
+                Log.d("tag","getAllPeople Error:${response.code()}")
+            }
+        }
     }
 
     private fun getAllTvShows() = viewModelScope.launch {

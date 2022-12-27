@@ -8,5 +8,6 @@ class TvShowRepository @Inject constructor(
 )
 {
     suspend fun getTvShows() = apiService.getTvShows()
+    suspend fun getPeople() = apiService.getPeople()
 
 }
