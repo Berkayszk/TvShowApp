@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             adapter = tvShowAdapter
             layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
+
         }
 
         binding.recyclerViewEpisode.apply {
